@@ -10,9 +10,14 @@ app.use(cors());
 
 app.get('/', async (req, res) => {
   const { api } = req.query;
+
+  if (!api) {
+    return res.status(400).json({
+      mess: 'Api Error',
+    });
+  }
   const { data } = await axios.get(api);
 
-  console.log(data);
   return res.json(data);
 });
 
